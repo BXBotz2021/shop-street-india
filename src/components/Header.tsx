@@ -1,8 +1,6 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, User } from "lucide-react";
-import { LoginModal } from "@/components/LoginModal";
+import { ShoppingCart } from "lucide-react";
 
 interface HeaderProps {
   cartItemCount: number;
@@ -10,9 +8,6 @@ interface HeaderProps {
 }
 
 export const Header = ({ cartItemCount, onCartClick }: HeaderProps) => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [user, setUser] = useState(null);
-
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="container mx-auto px-4 py-4">
@@ -27,24 +22,6 @@ export const Header = ({ cartItemCount, onCartClick }: HeaderProps) => {
           </div>
 
           <div className="flex items-center space-x-4">
-            {user ? (
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-700">Welcome, {user.name}</span>
-                <Button variant="ghost" onClick={() => setUser(null)}>
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              <Button
-                variant="ghost"
-                onClick={() => setIsLoginModalOpen(true)}
-                className="flex items-center space-x-2"
-              >
-                <User className="h-4 w-4" />
-                <span>Login</span>
-              </Button>
-            )}
-
             <Button
               variant="outline"
               onClick={onCartClick}
@@ -61,12 +38,6 @@ export const Header = ({ cartItemCount, onCartClick }: HeaderProps) => {
           </div>
         </div>
       </div>
-
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-        onLogin={setUser}
-      />
     </header>
   );
 };
